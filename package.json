@@ -1,0 +1,23 @@
+{
+  "name": "cpad-park-image-maker",
+  "version": "0.1.0",
+  "description": "Generate images from CPAD parks",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:stamen/cpad-park-image-maker.git"
+  },
+  "author": "evg@stamen.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stamen/cpad-park-image-maker/issues"
+  },
+  "homepage": "https://github.com/stamen/cpad-park-image-maker",
+  "dependencies": {
+    "mapnik": "~0.7.26",
+    "carto": "~0.9.5"
+  }
+}
