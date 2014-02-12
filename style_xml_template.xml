@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="transparent" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-118.3145,35.5478,-115.8371,37.4247</Parameter>
+  <Parameter name="center">-117.1335,36.4853,8</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">22</Parameter>
+  <Parameter name="name"><![CDATA[CPAD Parks]]></Parameter>
+  <Parameter name="description"><![CDATA[CPAD park shapes]]></Parameter>
+</Parameters>
+
+
+<Style name="cpad" filter-mode="first" >
+  <Rule>
+    <Filter>([su_id] = {{su_id}})</Filter>
+    <LineSymbolizer stroke-width="0" />
+    <PolygonSymbolizer fill-opacity="1" fill="{{color}}" />
+  </Rule>
+</Style>
+<Layer name="cpad"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>cpad</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[cpad_2013b_superunits_ids]]></Parameter>
+       <Parameter name="key_field"><![CDATA[]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-124.421781519769,32.5342713429807,-114.131460792639,42.0095036744016]]></Parameter>
+       <Parameter name="host"><![CDATA[geo.local]]></Parameter>
+       <Parameter name="port"><![CDATA[5432]]></Parameter>
+       <Parameter name="dbname"><![CDATA[openspaces]]></Parameter>
+       <Parameter name="user"><![CDATA[openspaces]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

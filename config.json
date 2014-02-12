@@ -1,0 +1,11 @@
+{
+  "postgis" : {
+    "host"       : "geo.local",
+    "port"       : 5432,
+    "user"       : "openspaces",
+    "db"         : "openspaces",
+    "table"      : "cpad_2013b_superunits_ids",
+    "geo_column" : "geom",
+    "id_column"  : "su_id"
+  }
+}
