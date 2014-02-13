@@ -55,7 +55,7 @@ s = '<Map srs="' + sm + '">';
 s += '<Style name="line">';
 s += ' <Rule>';
 s += ' <LineSymbolizer stroke-width="0" />';
-s += ' <PolygonSymbolizer fill-opacity="1" fill="rgba(0,0,0,.5)" />';
+s += ' <PolygonSymbolizer fill-opacity="1" fill="'+color+'" />';
 s += ' </Rule>';
 s += '</Style>';
 s += '</Map>';
