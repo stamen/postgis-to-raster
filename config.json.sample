@@ -1,0 +1,12 @@
+{
+  "postgis" : {
+    "host"        : "",
+    "port"        : 5432,
+    "user"        : "",
+    "db"          : "",
+    "table"       : "",
+    "geo_column"  : "geom",
+    "id_column"   : "",
+    "name_column" : "" 
+  }
+}
