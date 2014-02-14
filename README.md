@@ -11,15 +11,18 @@ To use for the first time:
   * Find the id for the row you would like
   * `node render-image <id> <CSS friendly color> <width in pixels> <height in pixels> <path to image>`
 
-...oh, if you see this error: "dyld: lazy symbol binding failed: Symbol not found: __ZN6mapnik15freetype_engine14register_fontsERKSsb"
+...oh, if you see this error: `dyld: lazy symbol binding failed: Symbol not found: __ZN6mapnik15freetype_engine14register_fontsERKSsb`
 
-do this:
-`rm -rf node_modules/`
-`export CXXFLAGS="-mmacosx-version-min=10.9"`
-`export CFLAGS="-mmacosx-version-min=10.9"`
-`export LDFLAGS="-mmacosx-version-min=10.9"`
-`npm install`
+...you're running OS X 10.9. Do this:
+
+```bash
+rm -rf node_modules/
+export CXXFLAGS="-mmacosx-version-min=10.9"
+export CFLAGS="-mmacosx-version-min=10.9"
+export LDFLAGS="-mmacosx-version-min=10.9"
+npm install
+```
 
 ------------------------------------------------------------------------
 
-Some code streaght up stollen from @springmeyer & @mojodna. Thanks guys!
+Some code straight up stolen from @springmeyer & @mojodna. Thanks guys!
