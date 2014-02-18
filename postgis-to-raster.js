@@ -6,7 +6,7 @@ function PostGISToRaster(config) {
       mapnik = require("mapnik");
 
   var conString = "postgres://"+config.user+"@"+config.host+"/"+config.db,
-      client    = new pg.Client(conString);
+      client;
 
   var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       options = {
@@ -19,6 +19,8 @@ function PostGISToRaster(config) {
 function getMapInstance(id, callback, opitons) {
 
   opitons = opitons || opitons;
+
+  client = new pg.Client(conString);
 
   var width  = options.width  || 300,
       height = options.height || 300,
@@ -82,12 +84,15 @@ function getMapInstance(id, callback, opitons) {
 
       map.zoomAll();
 
+      client.end();
+
+      client = null;
+
       //
       // Draw an image.
       //
-      callback(null, map);
+      callback(null, map, mapnik);
 
-      client.end();
     });
   });
 
