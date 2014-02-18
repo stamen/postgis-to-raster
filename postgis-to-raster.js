@@ -5,7 +5,7 @@ function PostGISToRaster(config) {
   var pg     = require("pg"),
       mapnik = require("mapnik");
 
-  var conString = "postgres://"+config.user+"@"+config.host+"/"+config.db,
+  var conString = config.dburl ? config.dburl || "postgres://"+config.user+"@"+config.host+"/"+config.db,
       client;
 
   var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
