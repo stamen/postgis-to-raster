@@ -1,7 +1,7 @@
 {
-  "name": "cpad-park-image-maker",
+  "name": "postgis-to-raster",
   "version": "0.1.0",
-  "description": "Generate images from CPAD parks",
+  "description": "Generate images from a geom column in PostGIS",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
