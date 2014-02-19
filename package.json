@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/stamen/cpad-park-image-maker",
   "dependencies": {
-    "mapnik": "~0.7.26",
+    "mapnik": "~1.2.3",
     "carto": "~0.9.5",
     "handlebars": "~2.0.0-alpha.1",
     "pg": "~2.11.1",
