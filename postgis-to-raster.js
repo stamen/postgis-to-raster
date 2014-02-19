@@ -2,6 +2,8 @@
 
 function PostGISToRaster(config) {
 
+  var util = require("util");
+
   var pg     = require("pg"),
       mapnik = require("mapnik");
 
@@ -50,7 +52,16 @@ function getMapInstance(id, callback, options) {
     if(err) {
       return callback(err);
     }
-    client.query('SELECT st_astext('+config.geo_column+') as wkt, st_asgeojson(st_box2d(cpad_2013b_superunits_ids.geom)) as bbox, '+config.id_column+' as id, '+config.name_column+' as name FROM '+config.table+' WHERE '+config.id_column+'='+id+';', function(err, result) {
+
+    return client.query(util.format("SELECT ST_AsText(%s) AS wkt," +
+      " ST_AsGeoJSON(ST_Envelope(cpad_2013b_superunits_ids.geom)) AS bbox, %s AS id," +
+      " %s AS name FROM %s WHERE %s=%d",
+        config.geo_column,
+        config.id_column,
+        config.name_column,
+        config.table,
+        config.id_column,
+        id), function(err, result) {}
       if(err) {
         return callback(err);
       }
