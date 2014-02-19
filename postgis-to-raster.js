@@ -16,9 +16,9 @@ function PostGISToRaster(config) {
       },
       sm, s, ds, l, map, bboxObject;
 
-function getMapInstance(id, callback, opitons) {
+function getMapInstance(id, callback, options) {
 
-  opitons = opitons || opitons;
+  options = options || options;
 
   client = new pg.Client(conString);
 
@@ -48,16 +48,17 @@ function getMapInstance(id, callback, opitons) {
 
   client.connect(function(err) {
     if(err) {
-      callback(err, null);
+      return callback(err);
     }
     client.query('SELECT st_astext('+config.geo_column+') as wkt, st_asgeojson(st_box2d(cpad_2013b_superunits_ids.geom)) as bbox, '+config.id_column+' as id, '+config.name_column+' as name FROM '+config.table+' WHERE '+config.id_column+'='+id+';', function(err, result) {
       if(err) {
-        callback(err, null);
+        return callback(err);
       }
 
       //
       // Construct the CSV datasource
       //
+
       ds = new mapnik.Datasource({
         'type': 'csv',
         'inline': 'id,wkt\n1,"' + result.rows[0].wkt + '"\n'
@@ -91,7 +92,7 @@ function getMapInstance(id, callback, opitons) {
       //
       // Draw an image.
       //
-      callback(null, map, mapnik);
+      return callback(null, map, mapnik);
 
     });
   });
