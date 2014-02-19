@@ -61,7 +61,8 @@ function getMapInstance(id, callback, options) {
         config.name_column,
         config.table,
         config.id_column,
-        id), function(err, result) {}
+        id), function(err, result) {
+
       if(err) {
         return callback(err);
       }
