@@ -2,12 +2,8 @@
 
 function PostGISToRaster(config) {
 
-  var assert = require("assert");
-
   var pg     = require("pg"),
       mapnik = require("mapnik");
-
-  assert.notNull(mapnik, "Mapnik wasn't loaded properly.");
 
   var conString = config.dburl ? config.dburl : "postgres://"+config.user+"@"+config.host+"/"+config.db,
       client;
