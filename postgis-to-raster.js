@@ -7,8 +7,7 @@ function PostGISToRaster(config) {
   var pg     = require("pg"),
       mapnik = require("mapnik");
 
-  var conString = config.dburl ? config.dburl : "postgres://"+config.user+"@"+config.host+"/"+config.db,
-      client;
+  var conString = config.dburl ? config.dburl : "postgres://"+config.user+"@"+config.host+"/"+config.db;
 
   var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       options = {
@@ -16,13 +15,11 @@ function PostGISToRaster(config) {
         height : null,
         color  : null
       },
-      sm, s, ds, l, map, bboxObject;
+      sm, s, ds, l, bboxObject;
 
 function getMapInstance(id, callback, options) {
 
   options = options || options;
-
-  client = new pg.Client(conString);
 
   var width  = options.width  || 300,
       height = options.height || 300,
@@ -45,12 +42,17 @@ function getMapInstance(id, callback, options) {
   //
   // Start the mapnik map instance
   //
-  map = new mapnik.Map(parseInt(width,10), parseInt(height, 10));
+  var map = new mapnik.Map(parseInt(width,10), parseInt(height, 10));
   map.fromStringSync(s);
 
-  client.connect(function(err) {
+  pg.connect(conString, function(err, client, cb) {
+    var done = function() {
+      cb();
+      return callback.apply(null, arguments);
+    }
+
     if(err) {
-      return callback(err);
+      return done(err);
     }
 
     return client.query(util.format("SELECT ST_AsText(%s) AS wkt," +
@@ -64,7 +66,7 @@ function getMapInstance(id, callback, options) {
         id), function(err, result) {
 
       if(err) {
-        return callback(err);
+        return done(err);
       }
 
       //
@@ -97,15 +99,10 @@ function getMapInstance(id, callback, options) {
 
       map.zoomAll();
 
-      client.end();
-
-      client = null;
-
       //
       // Draw an image.
       //
-      return callback(null, map, mapnik);
-
+      return done(null, map, mapnik);
     });
   });
 
